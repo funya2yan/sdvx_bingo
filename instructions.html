@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>How to Use</title>
+    <style>
+        h2 {
+            color: #ff5500;
+            font-size: 14pt;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-decoration: underline;
+        }
+
+        .instructions-section {
+            display: none;
+        }
+
+        ol>li {
+            margin-bottom: 20px;
+        }
+
+        #instructionsContent ul,
+        #instructionsContent ol {
+            font-size: 11pt;
+        }
+
+        .annotation {
+            display: block;
+            text-indent: -1em;
+            padding-left: 1em;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="instructionsContent">
+        <h1 style="color:#fff;">~How to Use~</h1>
+
+        <div id="demoInstructions" class="instructions-section">
+            <h2>Demo Mode</h2>
+            <ol>
+                <li>
+                    set the bingo card size (4x4 or 5x5) and seed value. Seed values can be entered directly or randomly
+                    generated using the “Generate Seed” button.
+                </li>
+                <li>
+                    click the “Generate Sheet” button with the seed values entered to generate a bingo sheet.
+                    <ul>
+                        <li>Left Click: Fill red color</li>
+                        <li>Left Click: Fill green color</li>
+                    </ul>
+                </li>
+                <li>
+                    Press the “take a screenshot” button at the bottom of the generated bingo sheet to save the bingo
+                    sheet
+                    and
+                    seed information as an image.
+                </li>
+                <li>
+                    click on the “Goal List” link and the lottery list will appear in a separate tab.
+                </li>
+            </ol>
+        </div>
+
+        <div id="csvInstructions" class="instructions-section">
+            <h2>CSV Mode</h2>
+            <ol>
+                <li>
+                    Prepare a CSV file.<br>
+                    <small class="annotation">
+                        *Enter the square information one by one in column A. By creating one blank line, the listings
+                        above
+                        the
+                        blank line will be drawn outside the center square, and the listings below the blank line will
+                        be
+                        drawn
+                        in
+                        the center square.
+                    </small>
+                    <small class="annotation">
+                        *If the list is less than 25 songs, the bingo sheet cannot be created.
+                    </small>
+                </li>
+                <li>
+                    click the “Select File” button in the “Import CSV:” area and select a locally stored CSV file. the
+                    CSV
+                    file must be in a format where the song names are listed in column A and the list is divided by a
+                    blank
+                    line.
+                </li>
+                <li>
+                    If the file is successfully imported, “(Import Completed)” will appear on the right side of the file
+                    name.
+                </li>
+                <li>
+                    click the “Generate Sheet” button with the seed values entered to generate a bingo sheet.
+                    <ul>
+                        <li>Left Click: Fill red color</li>
+                        <li>Left Click: Fill green color</li>
+                    </ul>
+                </li>
+                <li>
+                    Press the “take a screenshot” button at the bottom of the generated bingo sheet to save the bingo
+                    sheet
+                    and
+                    seed information as an image.
+                </li>
+                <li>
+                    click on the “Goal List” link and the lottery list will appear in a separate tab.
+                </li>
+
+            </ol>
+        </div>
+
+        <div id="googlesheetInstructions" class="instructions-section">
+            <h2>Google Sheet Mode</h2>
+            <ol>
+                <li>
+                    Prepare a Google Sheet.<br>
+                    <small class="annotation">
+                        *Enter the square information one by one in column A. By creating one blank line, the listings
+                        above
+                        the
+                        blank line will be drawn outside the center square, and the listings below the blank line will
+                        be
+                        drawn
+                        in
+                        the center square.
+                    </small>
+                    <small class="annotation">
+                        *If the list is less than 25 songs, the bingo sheet cannot be created.
+                    </small>
+                    <small class="annotation">
+                        *The created Google Sheet should be made public.
+                    </small>
+                </li>
+                <li>
+                    Paste the URL of the published Google Spreadsheet into the “Enter Google Sheet URL:” input field and
+                    press the “Load” button.
+                </li>
+                <li>
+                    If the data is successfully imported, “Load Completed” is displayed on the right side of the input
+                    field
+                    and the data is saved.
+                </li>
+                <li>
+                    click the “Generate Sheet” button with the seed values entered to generate a bingo sheet.
+                    <ul>
+                        <li>Left Click: Fill red color</li>
+                        <li>Left Click: Fill green color</li>
+                    </ul>
+                </li>
+                <li>
+                    Press the “take a screenshot” button at the bottom of the generated bingo sheet to save the bingo
+                    sheet
+                    and
+                    seed information as an image.
+                </li>
+                <li>
+                    click on the “Goal List” link and the lottery list will appear in a separate tab.
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var path = window.location.pathname;
+            var fileName = path.substring(path.lastIndexOf('/') + 1).toLowerCase();
+
+            if (fileName === "importcsv.html") {
+                document.getElementById("csvInstructions").style.display = "block";
+            } else if (fileName === "importgooglesheet.html") {
+                document.getElementById("googlesheetInstructions").style.display = "block";
+            } else {
+                document.getElementById("demoInstructions").style.display = "block";
+            }
+        })();
+    </script>
+</body>
+
+</html>

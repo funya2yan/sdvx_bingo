@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>SOUND VOLTEX Konaste Bingo Sheet (CSV Mode)</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/seedrandom.min.js"></script>
+    <script src="js/createsheet.js"></script>
+    <script src="js/importcsv.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+</head>
+
+<body>
+    <h1 id="pageTitle">SOUND VOLTEX Konaste Bingo Sheet</h1>
+
+    <div id="navBar" class="row">
+        <button class="navBtn" onclick="location.href='index.html'">Demo</button>
+        <button class="navBtn active" onclick="location.href='importcsv.html'">CSV</button>
+        <button class="navBtn" onclick="location.href='importgooglesheet.html'">Google Sheet</button>
+    </div>
+
+    <div id="csvImportArea" class="row" style="margin-bottom:15px; align-items:center;">
+        <label for="csvFileInput" style="margin-right:5px;">Import CSV:</label>
+        <button id="selectFileBtn" type="button">Select File</button>
+        <span id="selectedFileName" style="margin-left:10px;"></span>
+        <input type="file" id="csvFileInput" accept=".csv" style="display:none;">
+    </div>
+
+    <div id="controls">
+        <div class="row top-row">
+            <div>
+                <label for="boardSize">Size:</label>
+                <select id="boardSize">
+                    <option value="4">4×4</option>
+                    <option value="5" selected>5×5</option>
+                </select>
+            </div>
+            <div id="seedContainer">
+                <label for="seedInput">Seed:</label>
+                <input type="text" id="seedInput" placeholder="123456">
+                <button id="generateSeedBtn" type="button">Generate Seed</button>
+            </div>
+        </div>
+        <div class="row bottom-row">
+            <button id="generateBtn" disabled>Generate Sheet</button>
+            <button id="resetBtn" disabled>Reset</button>
+        </div>
+    </div>
+
+    <div id="sheetContainer" style="display:none;"></div>
+
+    <div id="maintenanceContainer">
+        <a id="goalListLink" href="goal-list.html?source=csvimport" class="maintenance-link" target="_blank">Goal
+            List</a>
+    </div>
+    <div id="instructionsContainer"></div>
+    <script>
+        $(function () {
+            $("#instructionsContainer").load("instructions.html");
+        });
+    </script>
+</body>
+
+</html>

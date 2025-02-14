@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Goal List</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/jquery-3.7.1.min.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+    function getQueryParams() {
+      var params = {};
+      var search = window.location.search.substring(1);
+      if (search) {
+        search.split('&').forEach(function (part) {
+          var item = part.split('=');
+          params[safeDecode(item[0])] = item.length > 1 ? safeDecode(item[1]) : "";
+        });
+      }
+      return params;
+    }
+    var params = getQueryParams();
+    console.log("Query Parameters:", params);
+  </script>
+  <script>
+    $(document).ready(function () {
+      if (params.source === "csvimport" || params.source === "googlesheet") {
+        var storedOther = localStorage.getItem("importOtherSongs");
+        var storedCenter = localStorage.getItem("importedCenterSongs");
+        console.log("Stored Other:", storedOther);
+        console.log("Stored Center:", storedCenter);
+        if (storedOther && storedCenter) {
+          window.otherSongs = JSON.parse(storedOther);
+          window.centerSongs = JSON.parse(storedCenter);
+          window.goalListLoaded = true;
+          displayLists();
+        } else {
+          console.error("No imported CSV data found in localStorage.");
+        }
+      } else {
+        $.getScript("js/goal-list-demo.js", function () {
+          displayLists();
+        });
+      }
+    });
+
+    function displayList(list, elementId) {
+      var container = $("#" + elementId);
+      $.each(list, function (index, item) {
+        container.append($("<li>").text(item));
+      });
+    }
+
+    function displayLists() {
+      displayList(window.otherSongs, "otherSongsList");
+      displayList(window.centerSongs, "centerSongsList");
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Goal List</h1>
+  <h2>[outside the center]</h2>
+  <ul id="otherSongsList"></ul>
+  <h2>[center]</h2>
+  <ul id="centerSongsList"></ul>
+</body>
+
+</html>
