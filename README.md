@@ -3,6 +3,8 @@
 This tool generates Sound Voltex bingo sheets. It is serverless and not very flexible, but can be used for simple races.  
 It can load lottery lists from default lists, CSV files that you prepare on your own, Google Spreadsheets, etc.
 
+https://funya2yan.github.io/sdvx_bingo/
+
 ---
 
 ## Specifications
