@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    sessionStorage.clear();
+    localStorage.clear();
+
     var loadGoogleBtn = $("#loadGoogleBtn");
     var googleInput = $("#googleInput");
     var googleStatus = $("#googleStatus");
@@ -46,8 +49,10 @@ $(document).ready(function () {
                         centerSongs: window.centerSongs
                     });
                     window.goalListLoaded = true;
-                    sessionStorage.setItem("importOtherSongs", JSON.stringify(window.otherSongs));
-                    sessionStorage.setItem("importedCenterSongs", JSON.stringify(window.centerSongs));
+                    localStorage.setItem("importOtherSongs", JSON.stringify(window.otherSongs));
+                    localStorage.setItem("importedCenterSongs", JSON.stringify(window.centerSongs));
+                    // sessionStorage.setItem("importOtherSongs", JSON.stringify(window.otherSongs));
+                    // sessionStorage.setItem("importedCenterSongs", JSON.stringify(window.centerSongs));
                     googleStatus.text("Load Completed");
                 })
                 .fail(function (error) {

@@ -16,6 +16,14 @@ $(document).ready(function () {
             selectedFileNameSpan.text("");
             return;
         }
+        // 拡張子チェック (.csv が末尾にあるか)
+        if (!file.name.toLowerCase().endsWith(".csv")) {
+            alert("Please select a CSV file.");
+            // ファイル選択をリセット
+            fileInput.val("");
+            selectedFileNameSpan.text("");
+            return;
+        }
         selectedFileNameSpan.text(file.name);
         var reader = new FileReader();
         reader.onload = function (evt) {

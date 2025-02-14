@@ -75,7 +75,9 @@ $(document).ready(function () {
   function renderBingoSheet(sheet, boardSize, seed) {
     var $container = $("#sheetContainer");
     $container.empty();
-    var $grid = $("<div>").addClass("bingo-sheet").css("grid-template-columns", "repeat(" + boardSize + ", 1fr)");
+    var $grid = $("<div>")
+      .addClass("bingo-sheet")
+      .css("grid-template-columns", "repeat(" + boardSize + ", 1fr)");
     for (var row = 0; row < sheet.length; row++) {
       for (var col = 0; col < sheet[row].length; col++) {
         var $cell = $("<div>").addClass("bingo-cell black").text(sheet[row][col]);
@@ -105,6 +107,10 @@ $(document).ready(function () {
         "</span>　seed：<span class='info-seed'>" + seed + "</span>");
     $container.append($info);
 
+    // 既存のスクリーンショットコンテナがあれば削除
+    $("#screenshotContainer").remove();
+
+    // 動的にスクリーンショットボタンのコンテナを生成し、#sheetContainerの直後に配置
     var $screenshotContainer = $("<div>")
       .attr("id", "screenshotContainer")
       .css({
@@ -115,20 +121,17 @@ $(document).ready(function () {
       .attr("id", "screenshotBtn")
       .text("Take a screenshot");
     $screenshotContainer.append($screenshotBtn);
-
     $("#sheetContainer").after($screenshotContainer);
 
     $screenshotBtn.on("click", function () {
       html2canvas(document.getElementById('sheetContainer')).then(function (canvas) {
         var dataUrl = canvas.toDataURL("image/png");
         var now = new Date();
-        var iso = now.toISOString(); // 例："2023-07-25T14:30:45.123Z"
+        var iso = now.toISOString(); // e.g., "2023-07-25T14:30:45.123Z"
         var datePart = iso.split('T')[0].split('-'); // ["2023", "07", "25"]
         var timePart = iso.split('T')[1].split('.')[0].split(':'); // ["14", "30", "45"]
         var timestamp = datePart[0].slice(-2) + datePart[1] + datePart[2] + "_" + timePart.join('');
-        // timestamp は "230725_143045" のような形式になります
         var filename = timestamp + "_sdvx_bingo.png";
-
 
         var link = document.createElement('a');
         link.href = dataUrl;
@@ -139,6 +142,7 @@ $(document).ready(function () {
       });
     });
   }
+
 
   function validateSeedInput() {
     var val = $.trim($("#seedInput").val());
@@ -204,9 +208,11 @@ $(document).ready(function () {
   $("#resetBtn").on("click", function () {
     $("#seedInput").val("");
     validateSeedInput();
-    $("#sheetContainer").hide();
+    $("#sheetContainer").hide().empty(); // シート内容を空にして非表示
+    $("#screenshotContainer").remove(); // スクリーンショットボタンコンテナを削除
     $("#generateSeedBtn").prop("disabled", false);
     $("#generateBtn").prop("disabled", true);
     $("#resetBtn").prop("disabled", true);
   });
+
 });
